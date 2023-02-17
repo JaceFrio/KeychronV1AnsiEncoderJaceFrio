@@ -13,3 +13,4 @@
 #define ENABLE_RGB_MATRIX_FIRE                        // Dave's Garage Tutorial + My Code
 #define ENABLE_RGB_MATRIX_FLOWER_BLOOMING             // Animation from Github
 #define ENABLE_RGB_MATRIX_KITT                        // Animation from Github`
+#define ENABLE_RGB_rainbow_esc                        // Test for keyboard.c

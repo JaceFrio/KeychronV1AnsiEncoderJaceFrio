@@ -15,6 +15,9 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "quantum.h"
+#include "lib/lib8tion/lib8tion.h"
+#include "quantum/rgb_matrix/rgb_matrix.h"
 
 // clang-format off
 
@@ -72,3 +75,27 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
 };
 #endif // ENCODER_MAP_ENABLE
+
+__attribute__((weak)) RGB rgb_matrix_hsv_to_rgb(HSV hsv) {
+    return hsv_to_rgb(hsv);
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+  for (uint8_t i = led_min; i < led_max; i++) {
+    // rainbow escape key
+    if (i == 0) {
+      uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed / 4, 1));
+      HSV hsv = rgb_matrix_config.hsv;
+      hsv.h = time;
+      RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
+      rgb_matrix_set_color(0, rgb.r, rgb.g, rgb.b);
+    }
+    if (host_keyboard_led_state().caps_lock) {
+      // HSV currentHsv = rgb_matrix_get_hsv();
+      // currentHsv.h += 100;
+      // RGB newRgb = rgb_matrix_hsv_to_rgb(currentHsv);
+      // rgb_matrix_set_color(45, newRgb.r, newRgb.g, newRgb.b);
+    }
+  }
+  return false;
+}
