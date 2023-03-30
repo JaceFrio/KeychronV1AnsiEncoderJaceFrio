@@ -18,6 +18,7 @@
 #include "quantum.h"
 #include "lib/lib8tion/lib8tion.h"
 #include "quantum/rgb_matrix/rgb_matrix.h"
+#include "print.h"
 
 // clang-format off
 
@@ -91,10 +92,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
       rgb_matrix_set_color(0, rgb.r, rgb.g, rgb.b);
     }
     if (host_keyboard_led_state().caps_lock) {
-      // HSV currentHsv = rgb_matrix_get_hsv();
-      // currentHsv.h += 100;
-      // RGB newRgb = rgb_matrix_hsv_to_rgb(currentHsv);
-      // rgb_matrix_set_color(45, newRgb.r, newRgb.g, newRgb.b);
+      
     }
   }
   return false;
